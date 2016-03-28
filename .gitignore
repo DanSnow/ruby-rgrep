@@ -94,3 +94,4 @@ build-iPhoneSimulator/
 *.out
 *.app
 
+*.log
