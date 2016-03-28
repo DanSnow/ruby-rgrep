@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rgrep (0.1.0)
+      rice
 
 GEM
   remote: https://rubygems.org/
@@ -14,6 +15,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rake (10.5.0)
+    rice (2.1.0)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)

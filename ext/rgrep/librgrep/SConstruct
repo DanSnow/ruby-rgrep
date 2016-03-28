@@ -1,0 +1,3 @@
+env = Environment(CXXFLAGS = ['-std=gnu++14', '-Wall', '-Wextra', '-O3'])
+
+env.SharedLibrary('rgrep', Glob('*.cpp'))

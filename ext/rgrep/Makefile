@@ -127,9 +127,9 @@ CCDLFLAGS = -fPIC
 CFLAGS   = $(CCDLFLAGS) -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -fPIC -O3 -std=gnu++14 $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS =  -I/home/snow/Desktop/rgrep/librgrep/src -D_FORTIFY_SOURCE=2 $(DEFS) $(cppflags)  -I/var/lib/gems/2.2.0/gems/rice-2.1.0/ruby/lib/include
+CPPFLAGS =  -I/home/snow/Desktop/rgrep/ruby-rgrep/rgrep/ext/rgrep/librgrep -D_FORTIFY_SOURCE=2 $(DEFS) $(cppflags)  -I/var/lib/gems/2.2.0/gems/rice-2.1.0/ruby/lib/include
 CXXFLAGS = $(CFLAGS)  -Wall -g
-ldflags  = -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -L/build/ruby2.2-po3Y09/ruby2.2-2.2.3/debian/lib -fstack-protector -rdynamic -Wl,-export-dynamic  -L/var/lib/gems/2.2.0/gems/rice-2.1.0/ruby/lib/lib -lrice -Wl,-rpath,/home/snow/Desktop/rgrep/librgrep/src
+ldflags  = -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -L/build/ruby2.2-po3Y09/ruby2.2-2.2.3/debian/lib -fstack-protector -rdynamic -Wl,-export-dynamic  -L/var/lib/gems/2.2.0/gems/rice-2.1.0/ruby/lib/lib -lrice -Wl,-rpath,/home/snow/Desktop/rgrep/ruby-rgrep/rgrep/ext/rgrep/librgrep
 dldflags =  
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
@@ -176,8 +176,8 @@ preload =
 
 CXX = g++
 
-libpath = /home/snow/Desktop/rgrep/librgrep/src . $(archlibdir)
-LIBPATH =  -L/home/snow/Desktop/rgrep/librgrep/src -L. -L$(archlibdir)
+libpath = /home/snow/Desktop/rgrep/ruby-rgrep/rgrep/ext/rgrep/librgrep . $(archlibdir)
+LIBPATH =  -L/home/snow/Desktop/rgrep/ruby-rgrep/rgrep/ext/rgrep/librgrep -L. -L$(archlibdir)
 DEFFILE = 
 
 CLEANFILES = mkmf.log

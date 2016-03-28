@@ -95,3 +95,11 @@ build-iPhoneSimulator/
 *.app
 
 *.log
+
+# Created by https://www.gitignore.io/api/scons
+
+### SCons ###
+# for projects that use SCons for building: http://http://www.scons.org/
+.sconsign.dblite
+*.os
+
