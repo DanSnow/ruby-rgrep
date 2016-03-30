@@ -17,9 +17,6 @@ Object rgrep_initialize(Object self, String query, String filename, Hash opts) {
   self.iv_set("@query", query);
   self.iv_set("@filename", filename);
   self.iv_set("@opts", opts);
-  Module(rb_mKernel).call("puts", self.iv_get("@opts"));
-  Hash ins_opts = self.iv_get("@opts");
-  Module(rb_mKernel).call("puts", ins_opts.get<Array, Symbol>(Symbol("cols")));
   return Qnil;
 }
 
@@ -29,17 +26,19 @@ Object rgrep_run(Object self) {
   string filename = from_ruby<string>(self.iv_get("@filename"));
   string begin_pat = from_ruby<string>(opts[Symbol("begin_pat")]);
   bool insensitive = from_ruby<bool>(opts[Symbol("insensitive")]);
+  int limit = from_ruby<int>(opts[Symbol("limit")]);
   Array columns_arr = opts.get<Array, Symbol>(Symbol("cols"));
   vector<string> columns;
   int column_len = columns_arr.size();
   Record record(begin_pat.c_str(), filename.c_str());
   Query query(query_str, insensitive);
+  int count = 0;
 
   for(auto it = columns_arr.begin(); it != columns_arr.end(); ++it) {
     columns.push_back(from_ruby<string>(*it));
   }
 
-  query.run(record, [&columns, &column_len](Record &record_parser, int rank_value) {
+  query.run(record, [&columns, &column_len, &count, &limit](Record &record_parser, int rank_value) {
     Hash data;
     data[String("rank")] = rank_value;
     for(int i = 0; i < column_len; ++i) {
@@ -50,6 +49,10 @@ Object rgrep_run(Object self) {
       free(attr);
     }
     protect(rb_yield, data);
+    if(~limit) {
+      ++count;
+      return count < limit;
+    }
     return true;
   });
   return Qnil;
