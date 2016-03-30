@@ -8,7 +8,15 @@ module RGrep
     end
 
     def run(&block)
-      @rgrep.run(&block)
+      if block_given?
+        @rgrep.run(&block)
+      else
+        Enumerator.new do |y|
+          @rgrep.run do |data|
+            y << data
+          end
+        end
+      end
     end
 
     private
@@ -17,7 +25,8 @@ module RGrep
       {
         insensitive: false,
         begin_pat: '@id:',
-        cols: ['title', 'content']
+        cols: ['id', 'title', 'content'],
+        limit: -1
       }
     end
   end
