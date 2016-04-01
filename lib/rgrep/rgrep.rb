@@ -25,7 +25,7 @@ module RGrep
       {
         insensitive: false,
         begin_pat: '@id:',
-        cols: ['id', 'title', 'content'],
+        cols: %w(id title content),
         limit: -1
       }
     end

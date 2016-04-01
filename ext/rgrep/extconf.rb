@@ -1,7 +1,6 @@
 require 'mkmf-rice'
 require 'pathname'
 
-
 LIBRGREP_PATH = Pathname('./librgrep').expand_path.to_s
 
 $CFLAGS << ' -O3 -std=gnu++14'
